@@ -26,6 +26,8 @@ public class DisplayMain
             TextExtractor txt = new TextExtractor();
             txt.begin(docPage);
 
+            Highlights highlights;
+
             //extracts words one by one
             TextExtractor.Word word;
             for (TextExtractor.Line line = txt.getFirstLine(); line.isValid(); line = line.getNextLine())
