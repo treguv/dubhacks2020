@@ -2,45 +2,44 @@ import java.io.File;
 import java.io.IOException;
 
 // These are the most important packages to import
-// for basic document manipulation. 
+// for basic document manipulation.
 import com.pdftron.common.PDFNetException;
 import com.pdftron.pdf.*;
 import com.pdftron.sdf.SDFDoc;
+import org.w3c.dom.Text;
 
 import java.io.*;
 
 public class PDFReadWrite
 {
     // Just a simple setup for the application
-    public static void main(String[] args)
-    {
-        // PDFNet must always be initialized before any PDFTron
-        // classes and methods can be used
-        PDFNet.initialize();
-        System.out.println("Hello World!!!");
+    public static void main(String[] args) {
+       try{
+           //init pdf
+           PDFNet.initialize();
+           //Set up link to the pdf
+           PDFDoc newDoc = new PDFDoc("C:\\Users\\vladi\\IdeaProjects\\dubhacks2020\\PDFReadWrite\\first_pdf.pdf");
+           //Make page object from first page of pdf
+           Page docPage = newDoc.getPage(1);
 
-        // Most PDFTron operations are required to be wrapped in
-        // a try-catch block for PDFNetException, or in a method/class that
-        // throws PDFNetException
-        try {
-            // Creates a new PDFDoc object
-            PDFDoc doc = new PDFDoc();
+           //Set up text extraction
+           TextExtractor txt = new TextExtractor();
+           txt.begin(docPage);
 
-            // Creating a new page and adding it
-            // to document's sequence of pages
-            Page page1 = doc.pageCreate();
-            doc.pagePushBack(page1);
+           //extracts words one by one
+           TextExtractor.Word word;
+           for (TextExtractor.Line line = txt.getFirstLine(); line.isValid(); line = line.getNextLine())
+           {
+               for (word = line.getFirstWord(); word.isValid(); word = word.getNextWord())
+               {
+                   System.out.println(word.getString());
+               }
+           }
 
-            // Files can be saved with various options
-            // Linearized files are the most effective
-            // for opening and viewing quickly on various platforms
-            doc.save(("linearized_ouput.pdf"), SDFDoc.SaveMode.LINEARIZED, null);
 
-            doc.close();
-        } catch (PDFNetException e) {
-            System.out.println(e);
-            e.getStackTrace();
-        }
-        PDFNet.terminate();
+       }catch (PDFNetException e){
+           System.out.println(e);
+           e.printStackTrace();
+       }
     }
 }
