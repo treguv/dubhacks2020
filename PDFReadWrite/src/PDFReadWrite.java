@@ -17,7 +17,7 @@ public class PDFReadWrite
         // PDFNet must always be initialized before any PDFTron
         // classes and methods can be used
         PDFNet.initialize();
-        System.out.println("Hello World!");
+        System.out.println("Hello World!!!");
 
         // Most PDFTron operations are required to be wrapped in
         // a try-catch block for PDFNetException, or in a method/class that
