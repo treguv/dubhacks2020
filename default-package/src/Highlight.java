@@ -8,12 +8,21 @@ class Highlight{
     protected int myAmount;
     protected ArrayList<String> myStudents;
 
-    public Highlight(int[] location, int amount){
-        myLocationX = location[0];
-        myLocationY = location[1];
-        myLocationWidth = location[2];
-        myLocationHeight = location[3];
+    public Highlight(int locationX, int locationY, int locationWidth, int locationHeight, int amount){
+        myLocationX = locationX;
+        myLocationY = locationY;
+        myLocationWidth = locationWidth;
+        myLocationHeight = locationHeight;
         myAmount = amount;
+        myStudents = new ArrayList<>();
+    }
+
+    public Highlight(int locationX, int locationY, int locationWidth, int locationHeight){
+        myLocationX = locationX;
+        myLocationY = locationY;
+        myLocationWidth = locationWidth;
+        myLocationHeight = locationHeight;
+        myAmount = 1;
         myStudents = new ArrayList<>();
     }
 
