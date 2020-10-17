@@ -12,9 +12,9 @@ import java.util.List;
 
 public class pdfBoxHighlight {
 
-    public static void main(String[]args) throws IOException {
+    public static void main(String[] args) throws IOException {
         ArrayList<String> testGetHighlights = new ArrayList<>();
-        testGetHighlights = getHighlightedText("C:\\Users\\Public\\Documents\\first_pdf.pdf", 0);
+        testGetHighlights = getHighlightedText("./numbered.pdf", 0);
         System.out.println(testGetHighlights.toString());
     }
 
@@ -32,27 +32,27 @@ public class pdfBoxHighlight {
         // get  annotation dictionaries
         List<PDAnnotation> annotations = page.getAnnotations();
 
-        for(int i=0; i<annotations.size(); i++) {
+        for (int i = 0; i < annotations.size(); i++) {
             // check subType
-            if(annotations.get(i).getSubtype().equals("Highlight")) {
+            if (annotations.get(i).getSubtype().equals("Highlight")) {
                 // extract highlighted text
                 PDFTextStripperByArea stripperByArea = new PDFTextStripperByArea();
 
                 COSArray quadsArray = (COSArray) annotations.get(i).getCOSObject().getDictionaryObject(COSName.getPDFName("QuadPoints"));
                 String str = null;
 
-                for(int j=1, k=0; j<=(quadsArray.size()/8); j++) {
+                for (int j = 1, k = 0; j <= (quadsArray.size() / 8); j++) {
 
-                    COSFloat ULX = (COSFloat) quadsArray.get(0+k);
-                    COSFloat ULY = (COSFloat) quadsArray.get(1+k);
-                    COSFloat URX = (COSFloat) quadsArray.get(2+k);
-                    COSFloat URY = (COSFloat) quadsArray.get(3+k);
-                    COSFloat LLX = (COSFloat) quadsArray.get(4+k);
-                    COSFloat LLY = (COSFloat) quadsArray.get(5+k);
-                    COSFloat LRX = (COSFloat) quadsArray.get(6+k);
-                    COSFloat LRY = (COSFloat) quadsArray.get(7+k);
+                    COSFloat ULX = (COSFloat) quadsArray.get(0 + k);
+                    COSFloat ULY = (COSFloat) quadsArray.get(1 + k);
+                    COSFloat URX = (COSFloat) quadsArray.get(2 + k);
+                    COSFloat URY = (COSFloat) quadsArray.get(3 + k);
+                    COSFloat LLX = (COSFloat) quadsArray.get(4 + k);
+                    COSFloat LLY = (COSFloat) quadsArray.get(5 + k);
+                    COSFloat LRX = (COSFloat) quadsArray.get(6 + k);
+                    COSFloat LRY = (COSFloat) quadsArray.get(7 + k);
 
-                    k+=8;
+                    k += 8;
 
                     float ulx = ULX.floatValue() - 1;                           // upper left x.
                     float uly = ULY.floatValue();                               // upper left y.
@@ -67,7 +67,7 @@ public class pdfBoxHighlight {
                     stripperByArea.extractRegions(page);
                     String highlightedText = stripperByArea.getTextForRegion("highlightedRegion");
 
-                    if(j > 1) {
+                    if (j > 1) {
                         str = str.concat(highlightedText);
                     } else {
                         str = highlightedText;
@@ -79,5 +79,10 @@ public class pdfBoxHighlight {
         document.close();
 
         return highlightedTexts;
+    }
+
+
+    public static void combineHighlight(ArrayList<Highlight>... arrays) {
+    //TO DO:
     }
 }

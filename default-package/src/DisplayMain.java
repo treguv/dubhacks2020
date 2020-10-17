@@ -44,4 +44,7 @@ public class DisplayMain
             e.printStackTrace();
         }
     }
+    public static void HiglightFinder(){
+
+    }
 }
