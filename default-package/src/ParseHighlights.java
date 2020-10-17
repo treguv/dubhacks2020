@@ -20,11 +20,11 @@ import java.util.List;
  */
 public class ParseHighlights {
     // class fields
-    ArrayList<String > myHighlights;
+    private ArrayList<String > myHighlights;
     /**
      * 1 param constructor
      *
-     * @param filePath the path to the file to be parsed for hightlights
+     * @param theFilePath the path to the file to be parsed for hightlights
      */
     public ParseHighlights(String theFilePath) {
         ArrayList<String> getHighlights = new ArrayList<>();
@@ -104,7 +104,9 @@ public class ParseHighlights {
         document.close();
         return highlightedTexts;
     }
-
+    public ArrayList<String> getMyHighlights(){
+        return myHighlights;
+    }
     /**
      *  Return string representation of the object
      * @return string representation of the object

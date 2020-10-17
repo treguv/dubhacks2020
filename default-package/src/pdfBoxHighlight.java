@@ -4,6 +4,7 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotation;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 
+import java.awt.desktop.ScreenSleepEvent;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +14,15 @@ import java.util.List;
 public class pdfBoxHighlight {
 
     public static void main(String[]args) throws IOException {
-        ParseHighlights highlights = new ParseHighlights("C:\\Users\\vladi\\Downloads\\New folder\\test-0.pdf");
-        System.out.println(highlights.toString());
+        //Parse demo pdf for just higlighted sections
+        ParseHighlights parse = new ParseHighlights("C:\\Users\\vladi\\Downloads\\New folder\\test-0.pdf");
+        //pass the demo stringinto the pdf writer
+        //Will make pdfs
+        CreatePDF testPdf = new CreatePDF();
+        //make a pdf obj
+        testPdf.addNewPage();
+        testPdf.writeArrayListText(parse.getMyHighlights());
+        testPdf.saveDocument("Hello World!.pdf");
     }
 
 
