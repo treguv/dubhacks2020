@@ -31,4 +31,6 @@ class Highlight{
     public String getText() {
         return myText;
     }
+
+    public String toString() { return this.myText + " " + this.myCount;}
 }
