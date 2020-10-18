@@ -179,7 +179,7 @@ public class HighlightParser {
 //        System.out.println();
 //        System.out.println();
 //        System.out.println();
-//        document.close();
+        document.close();
 
         return fileHighlights;
     }

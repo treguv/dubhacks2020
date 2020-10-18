@@ -98,7 +98,8 @@ public class HighlightPdf {
                                 highlightQuads.add(Quad.get(textBox));
                             }
                             // Highlight the text thePattern match!
-                            new TextMarkup(page, highlightQuads,null,  MarkupTypeEnum.Highlight).withColor(new DeviceRGBColor(0.0, 0.9, .2));
+                            new TextMarkup(page, highlightQuads,null,
+                              MarkupTypeEnum.Highlight).withColor(getColor());
                         }
                         @Override
                         public void remove() {
@@ -110,5 +111,9 @@ public class HighlightPdf {
 //        } catch (FileNotFoundException e){
 //            e.printStackTrace();
 //        }
+    }
+
+    private static DeviceRGBColor getColor() {
+        return new DeviceRGBColor(0.0, 0.9, .2);
     }
 }
