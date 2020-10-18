@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
+import java.util.Arrays;
 
 public class GUI {
 
@@ -37,7 +37,7 @@ public class GUI {
                 if (option == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
 //                    System.out.println("Directory selected: " + selectedFile.getName());
-                    iterateOverDirectory(selectedFile);
+                    getFilePaths(selectedFile);
                 }
             }
         });
@@ -53,16 +53,24 @@ public class GUI {
     }
 
     /**
-     * Iterates over the files in the given directory
-     * @param theDirectory the directory that stores the files to be iterated
-     * over
+     * Returns an Array of String file-paths from the given directory
+     * @param theDirectory the directory the file-paths are from
+     * @return an Array of String file-paths
      */
-    private static void iterateOverDirectory(File theDirectory) {
+    private static String[] getFilePaths(File theDirectory) {
+        // the list of files
         File[] fileList = theDirectory.listFiles();
-        System.out.println("Printing all of the file names in " + theDirectory.getName() + ":");
+        // the list of file-paths
+        String[] filePaths = new String[fileList.length];
+        int index = 0;
+
         for (File currFile : fileList) {
-            System.out.println(currFile.getName());
+            filePaths[index] = currFile.getPath();
+            index++;
         }
+
+        System.out.println(Arrays.toString(filePaths));
+        return filePaths;
     }
 
     // runs the program
