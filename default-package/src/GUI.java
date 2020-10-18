@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -44,7 +45,11 @@ public class GUI {
 
                 if (option == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    printHighlightsFromDirectory(selectedFile);
+                    try {
+                        printHighlightsFromDirectory(selectedFile);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -64,15 +69,43 @@ public class GUI {
      * console
      * @param theDirectory the directory the highlights are from
      */
-    private void printHighlightsFromDirectory(File theDirectory) {
+    private void printHighlightsFromDirectory(File theDirectory) throws FileNotFoundException {
+
+
+
+
+
+
         ArrayList<Highlight> highlightList =
             HighlightParser.getDirectoryHighlights(theDirectory);
-        System.out.println("Highlights from the whole directory:");
-        for (Highlight h : highlightList) {
-            System.out.println(h);
-            System.out.println();
-            System.out.println();
-        }
+//        System.out.println("Highlights from the whole directory:");
+//        for (Highlight h : highlightList) {
+//            System.out.println(h);
+//            System.out.println();
+//            System.out.println();
+//        }
+
+        String originalFileName = "/Users/skieratheart/Desktop/test-noHighlight.pdf";
+
+//        HighlightPdf.createHighlightDocument(originalFileName, highlightList);
+
+
+
+        Highlight test = new Highlight(" eget");
+        Highlight test2 = new Highlight("nulla");
+        ArrayList<Highlight> theArray = new ArrayList<Highlight>();
+        theArray.add(test);
+        theArray.add(test2);
+
+        HighlightPdf.createHighlightDocument(originalFileName, theArray);
+
+
+
+
+
+
+//
+//
     }
 
 }
