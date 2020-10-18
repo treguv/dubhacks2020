@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import org.pdfclown.documents.Page;
 import org.pdfclown.documents.contents.ITextString;
 import org.pdfclown.documents.contents.TextChar;
@@ -32,9 +31,8 @@ public class HighlightPdf {
         }
         // loop through the Highlights in theHighlightList
         for (Highlight currHighlight : theHighlightList) {
-            Pattern pattern = Pattern.compile(currHighlight.getText().trim(),
-             Pattern.CASE_INSENSITIVE);
-            highlightString(myFile, pattern);
+            highlightString(myFile, currHighlight,
+             getMaxHighlightOccurence(theHighlightList));
         }
         try{
             myFile.save(theOriginalFilePath.substring(0, theOriginalFilePath.length() - 4) + "result.pdf",
@@ -46,7 +44,10 @@ public class HighlightPdf {
         }
     }
 
-    public static void highlightString(File myFile, Pattern thePattern){
+    public static void highlightString(File myFile,
+     Highlight theHighlight, int maxOccurrences){
+        Pattern thePattern = Pattern.compile(theHighlight.getText().trim(),
+                Pattern.CASE_INSENSITIVE);
         // try{
         System.out.print("TRYING TO SEARCH!");
 
@@ -99,7 +100,7 @@ public class HighlightPdf {
                             }
                             // Highlight the text thePattern match!
                             new TextMarkup(page, highlightQuads,null,
-                              MarkupTypeEnum.Highlight).withColor(getColor());
+                              MarkupTypeEnum.Highlight).withColor(getColor(theHighlight, maxOccurrences));
                         }
                         @Override
                         public void remove() {
@@ -113,7 +114,29 @@ public class HighlightPdf {
 //        }
     }
 
-    private static DeviceRGBColor getColor() {
-        return new DeviceRGBColor(0.0, 0.9, .2);
+    /**
+    * todo bad comment
+     * Returns the maximum number of occurrences
+     * @param theHighlightList
+     * @return
+     */
+    private static int getMaxHighlightOccurence(ArrayList<Highlight> theHighlightList) {
+         int max = Integer.MIN_VALUE;
+         for (Highlight currHighlight : theHighlightList) {
+             if (currHighlight.getCount() > max) {
+                 max = currHighlight.getCount();
+             }
+         }
+         System.out.println(max);
+         return max;
+    }
+
+    private static DeviceRGBColor getColor(Highlight theHighlight,
+     int theMaxOccurences) {
+        double ratio =
+         (double) (theHighlight.getCount() / (double) theMaxOccurences);
+        return DeviceRGBColor.get(new Color(42, 127, 245));
+//        return new DeviceRGBColor(ratio * .5, .75, ratio);
+//        return new DeviceRGBColor(0.0, 0.9, .2);
     }
 }

@@ -72,6 +72,10 @@ public class HighlightParser {
                 System.out.println("error trying to add highlight from " + currFilePath);
             }
         }
+        System.out.println("PRINTING HIGHLIGHTS LIST");
+        for (Highlight h : directoryHighlights) {
+            System.out.println(h);
+        }
         return directoryHighlights;
     }
 
