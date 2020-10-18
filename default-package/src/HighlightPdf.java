@@ -35,10 +35,13 @@ public class HighlightPdf {
              getMaxHighlightOccurence(theHighlightList));
         }
         try{
-            myFile.save(theOriginalFilePath.substring(0, theOriginalFilePath.length() - 4) + "result.pdf",
+            String newFileName = theOriginalFilePath.substring(0,
+             theOriginalFilePath.length() - 4) + "result.pdf";
+            myFile.save(newFileName,
                     SerializationModeEnum.Incremental);
             myFile.close();
-            System.out.println("SAVED FILE!");
+            Desktop.getDesktop().open(new java.io.File(newFileName));
+//            System.out.println("SAVED FILE!");
         } catch(IOException e){
             e.printStackTrace();
         }
@@ -49,7 +52,7 @@ public class HighlightPdf {
         Pattern thePattern = Pattern.compile(theHighlight.getText().trim(),
                 Pattern.CASE_INSENSITIVE);
         // try{
-        System.out.print("TRYING TO SEARCH!");
+//        System.out.print("TRYING TO SEARCH!");
 
         TextExtractor textExtractor = new TextExtractor(true, true);
 
@@ -127,15 +130,27 @@ public class HighlightPdf {
                  max = currHighlight.getCount();
              }
          }
-         System.out.println(max);
+//         System.out.println(max);
          return max;
     }
 
     private static DeviceRGBColor getColor(Highlight theHighlight,
      int theMaxOccurences) {
-        double ratio =
-         (double) (theHighlight.getCount() / (double) theMaxOccurences);
-        return DeviceRGBColor.get(new Color(42, 127, 245));
+        double ratio = (double) (theHighlight.getCount() / (double) theMaxOccurences);
+        DeviceRGBColor color;
+        if (ratio < .25) {
+            color = DeviceRGBColor.get(new Color(115, 166, 231));
+        } else if(ratio < .5) {
+            color = DeviceRGBColor.get(new Color(115, 166, 231));
+        } else if (ratio < .75) {
+            color = DeviceRGBColor.get(new Color(115, 166, 231));
+        } else if (ratio < 1) {
+            color = DeviceRGBColor.get(new Color(115, 166, 231));
+        } else {
+            color = DeviceRGBColor.get(new Color(115, 166, 231));
+        }
+
+        return color;
 //        return new DeviceRGBColor(ratio * .5, .75, ratio);
 //        return new DeviceRGBColor(0.0, 0.9, .2);
     }

@@ -29,13 +29,17 @@ public class GUI {
      * Constructor
      */
     public GUI() {
-        final JFrame myFrame = new JFrame();
+        final JFrame myFrame = new JFrame("PDF Highlight Combiner DLX");
         final JPanel myPanel = new JPanel();
+        final String[] originalFilePath = new String[1];
 
-        // Set up the button
-        final JButton myButton = new JButton("Select Directory");
-        myButton.setFocusPainted(false);
-        myButton.addActionListener(new ActionListener() {
+        JLabel instructionsLabel = new JLabel("Select the original pdf " +
+         "document");
+
+        final JButton selectDirectory = new JButton("Select Directory");
+        selectDirectory.setFocusPainted(false);
+        selectDirectory.setVisible(false);
+        selectDirectory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 // much of this code came from link #1
@@ -46,16 +50,43 @@ public class GUI {
                 if (option == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
                     try {
-                        printHighlightsFromDirectory(selectedFile);
+                        printHighlightsFromDirectory(selectedFile,
+                         originalFilePath[0]);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    selectDirectory.setVisible(false);
+                    instructionsLabel.setText("Check for a result pdf file " +
+                     "with the results of the program!");
                 }
             }
         });
 
+        final JButton selectOriginalFile = new JButton("Select Original File");
+        selectOriginalFile.setFocusPainted(false);
+        selectOriginalFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                // much of this code came from link #1
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int option = fileChooser.showOpenDialog(myFrame);
+
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    originalFilePath[0] = selectedFile.getPath();
+                }
+                selectDirectory.setVisible(true);
+                selectOriginalFile.setVisible(false);
+                instructionsLabel.setText("Select the directory of identical pdf files with highlights");
+            }
+        });
+
+
         // add the button to the panel and add the panel to frame
-        myPanel.add(myButton);
+        myPanel.add(instructionsLabel);
+        myPanel.add(selectDirectory);
+        myPanel.add(selectOriginalFile);
         myFrame.getContentPane().add(myPanel, BorderLayout.CENTER);
 
         // set frame settings
@@ -69,7 +100,8 @@ public class GUI {
      * console
      * @param theDirectory the directory the highlights are from
      */
-    private void printHighlightsFromDirectory(File theDirectory) throws FileNotFoundException {
+    private void printHighlightsFromDirectory(File theDirectory,
+     String theOriginalFilePath) throws FileNotFoundException {
 
         ArrayList<Highlight> highlightList = HighlightParser.getDirectoryHighlights(theDirectory);
 
@@ -84,14 +116,14 @@ public class GUI {
 //        theArray.add(test);
 //        theArray.add(test2);
 
-        System.out.println("Highlights from the whole directory:");
-        for (Highlight h : highlightList) {
-            System.out.println(h);
-            System.out.println();
-            System.out.println();
-        }
+//        System.out.println("Highlights from the whole directory:");
+//        for (Highlight h : highlightList) {
+//            System.out.println(h);
+//            System.out.println();
+//            System.out.println();
+//        }
 
-        HighlightPdf.createHighlightDocument(originalFileName, highlightList);
+        HighlightPdf.createHighlightDocument(theOriginalFilePath, highlightList);
 
     }
 

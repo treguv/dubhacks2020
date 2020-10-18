@@ -72,9 +72,9 @@ public class HighlightParser {
                 System.out.println("error trying to add highlight from " + currFilePath);
             }
         }
-        System.out.println("PRINTING HIGHLIGHTS LIST");
+//        System.out.println("PRINTING HIGHLIGHTS LIST");
         for (Highlight h : directoryHighlights) {
-            System.out.println(h);
+//            System.out.println(h);
         }
         return directoryHighlights;
     }
@@ -173,7 +173,7 @@ public class HighlightParser {
                         Highlight newHighlight = new Highlight(s);
                         fileHighlights.add(newHighlight);
                     }
-                    System.out.println(Arrays.toString(lines));
+//                    System.out.println(Arrays.toString(lines));
                 }
             }
         }
