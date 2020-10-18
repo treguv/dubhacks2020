@@ -71,41 +71,29 @@ public class GUI {
      */
     private void printHighlightsFromDirectory(File theDirectory) throws FileNotFoundException {
 
-
-
-
-
-
         ArrayList<Highlight> highlightList =
             HighlightParser.getDirectoryHighlights(theDirectory);
-//        System.out.println("Highlights from the whole directory:");
-//        for (Highlight h : highlightList) {
-//            System.out.println(h);
-//            System.out.println();
-//            System.out.println();
-//        }
+
 
         String originalFileName = "/Users/skieratheart/Desktop/test-noHighlight.pdf";
 
 //        HighlightPdf.createHighlightDocument(originalFileName, highlightList);
 
+//        Highlight test = new Highlight(" eget");
+//        Highlight test2 = new Highlight("nulla");
+//        ArrayList<Highlight> theArray = new ArrayList<Highlight>();
+//        theArray.add(test);
+//        theArray.add(test2);
 
+        System.out.println("Highlights from the whole directory:");
+        for (Highlight h : highlightList) {
+            System.out.println(h);
+            System.out.println();
+            System.out.println();
+        }
 
-        Highlight test = new Highlight(" eget");
-        Highlight test2 = new Highlight("nulla");
-        ArrayList<Highlight> theArray = new ArrayList<Highlight>();
-        theArray.add(test);
-        theArray.add(test2);
+        HighlightPdf.createHighlightDocument(originalFileName, highlightList);
 
-        HighlightPdf.createHighlightDocument(originalFileName, theArray);
-
-
-
-
-
-
-//
-//
     }
 
 }

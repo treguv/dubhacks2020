@@ -32,7 +32,8 @@ public class HighlightPdf {
         }
         // loop through the Highlights in theHighlightList
         for (Highlight currHighlight : theHighlightList) {
-            Pattern pattern = Pattern.compile(currHighlight.getText(), Pattern.CASE_INSENSITIVE);
+            Pattern pattern = Pattern.compile(currHighlight.getText().trim(),
+             Pattern.CASE_INSENSITIVE);
             highlightString(myFile, pattern);
         }
         try{

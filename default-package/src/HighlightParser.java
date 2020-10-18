@@ -163,7 +163,8 @@ public class HighlightParser {
                     }
 
                     // create new Highlight and add it to the list of highlights
-                    Highlight newHighlight = new Highlight(highlightedString, 0);
+                    Highlight newHighlight = new Highlight(highlightedString,
+                     1);
                     fileHighlights.add(newHighlight);
                 }
             }
