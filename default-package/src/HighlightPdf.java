@@ -41,7 +41,7 @@ public class HighlightPdf {
         }
         try{
             String newFileName = theOriginalFilePath.substring(0,
-             theOriginalFilePath.length() - 4) + "result.pdf";
+             theOriginalFilePath.length() - 4) + "Result.pdf";
             myFile.save(newFileName,
                     SerializationModeEnum.Incremental);
             myFile.close();
