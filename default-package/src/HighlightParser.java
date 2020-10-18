@@ -1,6 +1,6 @@
 /*
  * SOURCES USED TO HELP CREATE THIS CLASS
- * TODO
+ * https://pdfbox.apache.org/
  */
 
 import org.apache.pdfbox.cos.*;
@@ -13,7 +13,6 @@ import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

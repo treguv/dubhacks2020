@@ -1,3 +1,8 @@
+/* SOURCES USED TO HELP CREATE THIS CLASS
+ * https://pdfclown.org/
+ */
+
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.FileNotFoundException;

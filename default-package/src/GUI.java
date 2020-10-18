@@ -1,6 +1,5 @@
 /*
  * SOURCES USED TO HELP CREATE THIS CLASS
- * TODO
  * (#1)I used this method for File Chooser help
  * https://www.tutorialspoint.com/swingexamples/show_file_chooser_directory_only.htm
  */
@@ -14,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
- * TODO This comment sucks
  * The GUI class displays a Frame on the screen and takes user input. Once
  * the user selects a directory, a pdf is made with the common highlights
  * from the directory
@@ -34,7 +32,7 @@ public class GUI {
         final String[] originalFilePath = new String[1];
 
         JLabel instructionsLabel = new JLabel("Select the original pdf " +
-         "document");
+                "document");
 
         final JButton selectDirectory = new JButton("Select Directory");
         selectDirectory.setFocusPainted(false);
@@ -78,10 +76,10 @@ public class GUI {
                 }
                 selectDirectory.setVisible(true);
                 selectOriginalFile.setVisible(false);
-                instructionsLabel.setText("Select the directory of identical pdf files with highlights");
+                instructionsLabel.setText("Select the directory of identical pdf" +
+                        " files with highlights");
             }
         });
-
 
         // add the button to the panel and add the panel to frame
         myPanel.add(instructionsLabel);
@@ -102,14 +100,12 @@ public class GUI {
      */
     private void printHighlightsFromDirectory(File theDirectory,
      String theOriginalFilePath) throws FileNotFoundException {
-
         ArrayList<Highlight> highlightList = HighlightParser.getDirectoryHighlights(theDirectory);
 
+         HighlightPdf.createHighlightDocument(theOriginalFilePath,
+                 highlightList);
 
-        String originalFileName = "/Users/skieratheart/Desktop/test-noHighlight.pdf";
-
-//        HighlightPdf.createHighlightDocument(originalFileName, highlightList);
-
+//        for testing purposes:
 //        Highlight test = new Highlight(" eget");
 //        Highlight test2 = new Highlight("nulla");
 //        ArrayList<Highlight> theArray = new ArrayList<Highlight>();
@@ -122,8 +118,6 @@ public class GUI {
 //            System.out.println();
 //            System.out.println();
 //        }
-
-        HighlightPdf.createHighlightDocument(theOriginalFilePath, highlightList);
 
     }
 
