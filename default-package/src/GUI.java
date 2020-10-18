@@ -1,9 +1,8 @@
 /*
+ * SOURCES USED TO HELP CREATE THIS CLASS
+ * TODO
  * (#1)I used this method for File Chooser help
  * https://www.tutorialspoint.com/swingexamples/show_file_chooser_directory_only.htm
- *
- *
- *
  */
 
 import javax.swing.*;
@@ -11,9 +10,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Arrays;
+import java.util.ArrayList;
 
+/**
+ * TODO This comment sucks
+ * The GUI class displays a Frame on the screen and takes user input. Once
+ * the user selects a directory, a pdf is made with the common highlights
+ * from the directory
+ */
 public class GUI {
+    // runs the program
+    public static void main(String[] args) {
+        new GUI();
+    }
 
     /**
      * Constructor
@@ -22,10 +31,9 @@ public class GUI {
         final JFrame myFrame = new JFrame();
         final JPanel myPanel = new JPanel();
 
-        // button
+        // Set up the button
         final JButton myButton = new JButton("Select Directory");
         myButton.setFocusPainted(false);
-        // button action when pressed
         myButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -36,8 +44,7 @@ public class GUI {
 
                 if (option == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-//                    System.out.println("Directory selected: " + selectedFile.getName());
-                    getFilePaths(selectedFile);
+                    printHighlightsFromDirectory(selectedFile);
                 }
             }
         });
@@ -53,28 +60,19 @@ public class GUI {
     }
 
     /**
-     * Returns an Array of String file-paths from the given directory
-     * @param theDirectory the directory the file-paths are from
-     * @return an Array of String file-paths
+     * Prints the highlights from the files in the given directory on the
+     * console
+     * @param theDirectory the directory the highlights are from
      */
-    private static String[] getFilePaths(File theDirectory) {
-        // the list of files
-        File[] fileList = theDirectory.listFiles();
-        // the list of file-paths
-        String[] filePaths = new String[fileList.length];
-        int index = 0;
-
-        for (File currFile : fileList) {
-            filePaths[index] = currFile.getPath();
-            index++;
+    private void printHighlightsFromDirectory(File theDirectory) {
+        ArrayList<Highlight> highlightList =
+            HighlightParser.getDirectoryHighlights(theDirectory);
+        System.out.println("Highlights from the whole directory:");
+        for (Highlight h : highlightList) {
+            System.out.println(h);
+            System.out.println();
+            System.out.println();
         }
-
-        System.out.println(Arrays.toString(filePaths));
-        return filePaths;
     }
 
-    // runs the program
-    public static void main(String[] args) {
-        new GUI();
-    }
 }

@@ -164,8 +164,4 @@ public class PdfBoxHighlight extends PDFTextStripper{
         }
     }
 
-
-    public static void combineHighlight(ArrayList<Highlight>... arrays) {
-    //TO DO:
-    }
 }
