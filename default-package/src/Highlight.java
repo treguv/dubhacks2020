@@ -1,21 +1,29 @@
+import java.io.IOException;
 
 class Highlight{
+    /**
+     * Fields
+     */
     protected String myText;
-    protected int myPage;
     protected int myCount;
 
-    public Highlight(String theText, int thePage, int theCount){
+    /**
+     * Constructors
+     */
+    public Highlight(String theText, int theCount){
         myText = theText;
-        myPage = thePage;
         myCount = theCount;
     }
 
-    public Highlight(String theText, int thePage){
+    public Highlight(String theText){
         myText = theText;
-        myPage = thePage;
         myCount = 1;
     }
 
+    /**
+     * Compares two Highlight objects.
+     * @param theOtherHighlight the Highlight we want to compare to.
+     */
     public Boolean compare(Highlight theOtherHighlight){
         return myText.equals(theOtherHighlight.getText());
     }
