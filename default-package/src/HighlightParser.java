@@ -13,6 +13,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -162,21 +163,23 @@ public class HighlightParser {
                         highlightedString = highlightedText;
                     }
 
-                    // create new Highlight and add it to the list of highlights
-                    Highlight newHighlight = new Highlight(highlightedString,
-                     1);
-                    fileHighlights.add(newHighlight);
+                    // make a highlight from each line of the highlightedString
+                    String[] lines = highlightedString.split("\\r?\\n");
+                    for (String s : lines) {
+                        Highlight newHighlight = new Highlight(s);
+                        fileHighlights.add(newHighlight);
+                    }
+                    System.out.println(Arrays.toString(lines));
                 }
             }
-
         }
-        System.out.println("Highlights from " + theFilePath + ":");
-        System.out.println(fileHighlights.toString());
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        document.close();
+//        System.out.println("Highlights from " + theFilePath + ":");
+//        System.out.println(fileHighlights.toString());
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        document.close();
 
         return fileHighlights;
     }

@@ -71,8 +71,7 @@ public class GUI {
      */
     private void printHighlightsFromDirectory(File theDirectory) throws FileNotFoundException {
 
-        ArrayList<Highlight> highlightList =
-            HighlightParser.getDirectoryHighlights(theDirectory);
+        ArrayList<Highlight> highlightList = HighlightParser.getDirectoryHighlights(theDirectory);
 
 
         String originalFileName = "/Users/skieratheart/Desktop/test-noHighlight.pdf";
