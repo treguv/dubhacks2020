@@ -1,5 +1,6 @@
 /* SOURCES USED TO HELP CREATE THIS CLASS
  * https://pdfclown.org/
+ * https://stackoverflow.com/questions/45498469/pdf-clown-highlight-multiple-search-word-is-failing-for-pdf-contains-images-col
  */
 
 

@@ -1,6 +1,7 @@
 /*
  * SOURCES USED TO HELP CREATE THIS CLASS
  * https://pdfbox.apache.org/
+ * https://stackoverflow.com/questions/32608083/not-able-to-read-the-exact-text-highlighted-across-the-lines
  */
 
 import org.apache.pdfbox.cos.*;
