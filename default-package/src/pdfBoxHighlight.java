@@ -19,7 +19,7 @@ public class pdfBoxHighlight {
         //pass the demo stringinto the pdf writer
         //Will make pdfs
         CreatePDF testPdf = new CreatePDF();
-        //make a pdf obj
+        //write array list into pdf
         testPdf.addNewPage();
         testPdf.writeArrayListText(parse.getMyHighlights());
         testPdf.saveDocument("Hello World!.pdf");

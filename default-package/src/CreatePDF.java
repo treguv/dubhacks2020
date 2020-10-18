@@ -1,4 +1,5 @@
 import org.apache.pdfbox.cos.*;
+import org.apache.pdfbox.pdfwriter.ContentStreamWriter;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.cos.*;
 import org.apache.pdfbox.pdmodel.*;
@@ -8,14 +9,19 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1CFont;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotation;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * EXPECTING: Input of Arraylist of strings that were highlighted and how many times they were highlighted
+ */
 public class CreatePDF {
+    //Set up the writer to append instead of overwirite
     //this pdf object
     private PDDocument myPDF;
-    private PDFont myFont = PDType1Font.HELVETICA_BOLD;
+    private PDFont myFont = PDType1Font.TIMES_ROMAN;
     private PDPage myCurrentPage;
     private float myFontSize = 12;
 
@@ -44,13 +50,13 @@ public class CreatePDF {
         myCurrentPage = newPage;
         myPDF.addPage(newPage);
     }
-    public void writeText(String theText){
+    public void writeText(String theText, int theXPos, int theYPos){
         try{
             PDPageContentStream contentStream = new PDPageContentStream(myPDF, myCurrentPage);//Make new stream
             contentStream.beginText();//Open a text stream
             contentStream.setFont(myFont, myFontSize        );
             //contentStream.moveTextPositionByAmount(100,600);
-            contentStream.drawString(theText);
+            contentStream.drawString(theText); //PDPageContentStream.AppendMode.APPEND <-- Stupid depricated method
             contentStream.endText();
             contentStream.close();
 
@@ -78,8 +84,12 @@ public class CreatePDF {
      * Takes in an array list and writes its contents onto the page
      * @param theArrayList the array list to write
      */
-    public void writeArrayListText(ArrayList<String> theArrayList){
-
+    public void writeArrayListText(@NotNull ArrayList<String> theArrayList){
+        for(int i = 0;i <  theArrayList.size(); i++){
+            String currentText = theArrayList.get(i);
+            currentText = currentText.replace("\n","").replace("\r","");
+            writeText(currentText);
+        }
     }
 
 }
