@@ -50,14 +50,17 @@ public class HighlightParser {
                 // directoryHighlights that are in the current fileHighlights
                 // If there is, increment the count in the
                 // directoryHighlight and remove the fileHighlight
-                for (Highlight directoryHighlight : directoryHighlights) {
-                    for (Highlight fileHighlight : fileHighlights) {
-                        // compare the highlights
+                for (int i = 0; i < directoryHighlights.size(); i++) {
+                    for (int j = 0; j < fileHighlights.size(); j++) {
+                        Highlight directoryHighlight =
+                         directoryHighlights.get(i);
+                        Highlight fileHighlight = fileHighlights.get(j);
                         if (directoryHighlight.compare(fileHighlight)) {
                             // the highlights are the same, so increment the
                             // directory highlight and remove the fileHighlight
                             directoryHighlight.increaseCount();
                             fileHighlights.remove(fileHighlight);
+                            j--;
                             break;
                         }
                     }
@@ -70,6 +73,7 @@ public class HighlightParser {
                 }
             } catch (Exception e) {
                 System.out.println("error trying to add highlight from " + currFilePath);
+                e.printStackTrace();
             }
         }
 //        System.out.println("PRINTING HIGHLIGHTS LIST");
